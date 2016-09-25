@@ -68,6 +68,44 @@ class TestTableExplorer(unittest.TestCase):
         self.assertEqual(table.height, 1)
 
 
+    def test_at(self):
+        table = TableExplorer(self.table_one_cell)
+        for x in range(table.width):
+            for y in range(table.height):
+                cell = table.at(x,y)
+                self.assertIsInstance(cell, Cell)
+
+        table = TableExplorer(self.table_simple)
+        for x in range(table.width):
+            for y in range(table.height):
+                cell = table.at(x,y)
+                self.assertIsInstance(cell, Cell)
+
+        table = TableExplorer(self.table_rowspan_colspan)
+        for x in range(table.width):
+            for y in range(table.height):
+                cell = table.at(x,y)
+                self.assertIsInstance(cell, Cell)
+
+        table = TableExplorer(self.table_one_cell_rowspan_colspan)
+        for x in range(table.width):
+            for y in range(table.height):
+                cell = table.at(x,y)
+                self.assertIsInstance(cell, Cell)
+
+        table = TableExplorer(self.table_one_column)
+        for x in range(table.width):
+            for y in range(table.height):
+                cell = table.at(x,y)
+                self.assertIsInstance(cell, Cell)
+
+        table = TableExplorer(self.table_one_row)
+        for x in range(table.width):
+            for y in range(table.height):
+                cell = table.at(x,y)
+                self.assertIsInstance(cell, Cell)
+
+
     def test_number_of_cells(self):
         table = TableExplorer(self.table_one_cell)
         self.assertEqual(len(table.all()), 1)
