@@ -8,24 +8,30 @@ class Cell:
         'height': 'rowspan',
     }
 
-    def __init__(self, ids):
+
+    def __init__(self, ids, html, text, colspan, rowspan, x_offset, y_offset):
         self.ids = ids
 
-        self.rowspan = None
-        self.colspan = None
+        self.html = html  # HTML content of the cell
+        self.text = text  # text content of the cell (all tags stripped)
 
-        self.x_offset = None
-        self.y_offset = None
+        self.colspan = colspan
+        self.rowspan = rowspan
+
+        self.x_offset = x_offset
+        self.y_offset = y_offset
 
         self.top_cells    = []
         self.right_cells  = []
         self.bottom_cells = []
         self.left_cells   = []
 
+
     # we need to override __setattr__() to support aliases
     def __setattr__(self, name, value):
         name = self.aliases.get(name, name)
         object.__setattr__(self, name, value)
+
 
     def __getattr__(self, name):
         if name == "aliases":

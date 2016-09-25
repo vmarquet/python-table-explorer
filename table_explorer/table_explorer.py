@@ -61,7 +61,7 @@ class TableExplorer:
                         logger.debug("k = %s, l = %s" % (k, l))
                         indexes.append((k,l))
 
-                cell = Cell(indexes)
+                cell = Cell(indexes, next(item.children), item.get_text(), width_, height_, i_effective, j)
                 logger.debug('adding cell which occupies %s' % str(indexes))
 
                 for index in indexes:
@@ -71,7 +71,6 @@ class TableExplorer:
                 logger.debug("%s %s -> %s || " % (i, j, item.get_text().strip()))
 
                 i += width_
-
 
             logger.debug("-"*50)
 
