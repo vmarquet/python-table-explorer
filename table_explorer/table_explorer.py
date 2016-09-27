@@ -86,25 +86,25 @@ class TableExplorer:
                 # adding link to top cell
                 if j is not 0:
                     top_cell = self.cells['%s.%s' % (i,j-1)]
-                    if top_cell not in cell.top_cells:
+                    if top_cell not in cell.top_cells and top_cell is not cell:
                         cell.top_cells.append(top_cell)
 
                 # adding link to right cell
                 if i is not (self.width-1):
                     right_cell = self.cells['%s.%s' % (i+1,j)]
-                    if right_cell not in cell.right_cells:
+                    if right_cell not in cell.right_cells and right_cell is not cell:
                         cell.right_cells.append(right_cell)
 
                 # adding link to bottom cell
                 if j is not (self.height-1):
                     bottom_cell = self.cells['%s.%s' % (i,j+1)]
-                    if bottom_cell not in cell.bottom_cells:
+                    if bottom_cell not in cell.bottom_cells and bottom_cell is not cell:
                         cell.bottom_cells.append(bottom_cell)
 
                 # adding link to left cell
                 if i is not 0:
                     left_cell = self.cells['%s.%s' % (i-1,j)]
-                    if left_cell not in cell.left_cells:
+                    if left_cell not in cell.left_cells and left_cell is not cell:
                         cell.left_cells.append(left_cell)
 
 

@@ -40,3 +40,15 @@ class Cell:
         return object.__getattribute__(self, name)
 
 
+    def __repr__(self):
+        return '<Cell x_offset=%s y_offset=%s colspan=%s rowspan=%s>' \
+            % (self.x_offset, self.y_offset, self.colspan, self.rowspan)
+
+
+    def __lt__(self, other):
+        if self.y_offset != other.y_offset:
+            return self.y_offset < other.y_offset
+        elif self.x_offset != other.x_offset:
+            self.x_offset < other.x_offset
+        return False
+

@@ -85,3 +85,47 @@ class TestCell(unittest.TestCase):
             self.assertEqual(table.at(index[0],index[1]).width, 1)
             self.assertEqual(table.at(index[0],index[1]).height, 1)
 
+
+    def test_links_between_cells(self):
+        table = TableExplorer(self.table_rowspan_colspan)
+
+        neighbours = [
+            {
+                'source': [(0,0), (0,1), (1,0), (1,1)],
+                'top': [],
+                'right': [(2,0), (2,1), (3,1), (2,2), (3,2)],
+                'bottom': [(0,2), (1,2)],
+                'left': []
+            },
+            {
+                'source': [(1,2)],
+                'top': [(0,0), (0,1), (1,0), (1,1)],
+                'right': [(2,1), (3,1), (2,2), (3,2)],
+                'bottom': [(1,3), (2,3), (1,4), (2,4)],
+                'left': [(0,2)]
+            },
+            {
+                'source': [(3,4)],
+                'top': [(3,3)],
+                'right': [],
+                'bottom': [],
+                'left': [(1,3), (2,3), (1,4), (2,4)]
+            }
+        ]
+
+        for x in range(table.width):
+            for y in range(table.height):
+                for item in neighbours:
+                    if (x,y) in item['source']:
+                        top_cells = list(set(map(lambda item: table.at(item[0],item[1]), item['top'])))
+                        self.assertEqual(sorted(top_cells), sorted(table.at(x,y).top_cells))
+
+                        right_cells = list(set(map(lambda item: table.at(item[0],item[1]), item['right'])))
+                        self.assertEqual(sorted(right_cells), sorted(table.at(x,y).right_cells))
+
+                        bottom_cells = list(set(map(lambda item: table.at(item[0],item[1]), item['bottom'])))
+                        self.assertEqual(sorted(bottom_cells), sorted(table.at(x,y).bottom_cells))
+
+                        left_cells = list(set(map(lambda item: table.at(item[0],item[1]), item['left'])))
+                        self.assertEqual(sorted(left_cells), sorted(table.at(x,y).left_cells))
+
